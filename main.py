@@ -8,13 +8,17 @@ import matplotlib.pyplot as plt
 
 ##################### problem definition
 
-def costFunction(x):
-    return problem(x)
+P = 100
+M = 8
 
-nVar = 10              # Number of Decision Variables
+def costFunction(x):
+    return problem(x, P, M)
+
+nVar = 4              # Number of Decision Variables
 varSize = nVar        # Size of Decision Variable Matrix
-varMin = -20          # Lower Bound of Variables
-varMax = 20           # Upper Bound of Variables
+varMin = 0            # Lower Bound of Variables
+varMax = 1            # Upper Bound of Variables
+
 
 ##################### PSO parameters
 
