@@ -12,7 +12,8 @@ P = 100
 M = 8
 
 def costFunction(x):
-    return problem(x, P, M)
+    cost, solution = problem(x, P, M) 
+    return cost, solution
 
 nVar = 4              # Number of Decision Variables
 varSize = nVar        # Size of Decision Variable Matrix
@@ -56,6 +57,7 @@ class Particle:
 empty_particle = Particle()
 
 empty_particle.position = np.array([])
+empty_particle.solution = np.array([])
 empty_particle.cost = None
 empty_particle.velocity = np.array([])
 empty_particle.best_position = np.array([])
@@ -76,7 +78,7 @@ global_best_particle.cost = math.inf
 for particle in pop:
     particle.position = np.random.uniform(low=varMin, high=varMax, size=varSize)
     particle.velocity = np.zeros(shape=varSize)
-    particle.cost = costFunction(particle.position)
+    particle.cost, particle.solution = costFunction(particle.position)
     particle.best_position = particle.position
     particle.best_cost = particle.cost
 
@@ -107,7 +109,7 @@ for itr in range(maxIt):
         particle.position = particle.position + particle.velocity
         
         # update cost
-        particle.cost = costFunction(particle.position)
+        particle.cost, particle.solution = costFunction(particle.position)
         
         # update personal Best
         if particle.cost < particle.best_cost:
@@ -120,6 +122,7 @@ for itr in range(maxIt):
 
     best_cost_list.append(global_best_particle.cost)
     print(global_best_particle.cost)
+    print(global_best_particle.solution)
     w = w * w_damp
 
 plt.plot(best_cost_list)
