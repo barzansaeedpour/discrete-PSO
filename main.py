@@ -13,7 +13,7 @@ M = 8
 
 def costFunction(x):
     cost, solution = problem(x, P, M) 
-    return cost, solution
+    return cost, solution  
 
 nVar = 4              # Number of Decision Variables
 varSize = nVar        # Size of Decision Variable Matrix
