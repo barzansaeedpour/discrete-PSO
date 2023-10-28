@@ -8,14 +8,14 @@ import matplotlib.pyplot as plt
 
 ##################### problem definition
 
-P = 100
-M = 8
-
 def costFunction(x):
     cost, solution = problem(x, P, M) 
     return cost, solution  
 
-nVar = 4              # Number of Decision Variables
+
+P = 1000
+M = 8
+nVar = 5              # Number of Decision Variables
 varSize = nVar        # Size of Decision Variable Matrix
 varMin = 0            # Lower Bound of Variables
 varMax = 1            # Upper Bound of Variables
@@ -77,6 +77,7 @@ global_best_particle.cost = math.inf
 # Initialize the particles
 for particle in pop:
     particle.position = np.random.uniform(low=varMin, high=varMax, size=varSize)
+    # particle.position = np.array([0.41,0.21,0.51,0.51,0.51])
     particle.velocity = np.zeros(shape=varSize)
     particle.cost, particle.solution = costFunction(particle.position)
     particle.best_position = particle.position
@@ -103,7 +104,8 @@ for itr in range(maxIt):
         particle.velocity = (w * particle.velocity) + (c1 * r1 * (particle.best_position - particle.position)) + (c2 * r2 * (global_best_particle.position - particle.position))
 
         # apply velocity limits
-        # if particle.velocity
+        particle.velocity = np.array([max(p,velMin) for p in particle.velocity])
+        particle.velocity = np.array([min(p,velMax) for p in particle.velocity])
 
         # update position
         particle.position = particle.position + particle.velocity
