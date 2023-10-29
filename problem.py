@@ -7,7 +7,7 @@ def discrete_problem(x, P, M):
     # the problem is to find nVar numbers lower than M that their multiplication is equal to P and 
     # their summation is minimum
     # example:
-    # P = 100
+    # P = 1000
     # M = 8
     # x = [0.41,0.21,0.51,0.51,0.51]
     # ===> K = [4,2,5,5,5]
